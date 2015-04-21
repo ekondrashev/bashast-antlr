@@ -23,10 +23,8 @@ grammar Bashast;
 
 options
 {
-	output = AST;
 
 	language = Java;
-	ASTLabelType = CommonTree;
 
 }
 
@@ -612,8 +610,8 @@ string_expr_part
 
 string_expr_no_reserved_word
 	:	(
-				non_quoted_string string_expr_part*
-				|	quoted_string string_expr_part*
+				non_quoted_string wspace? string_expr_part*
+				|	quoted_string wspace? string_expr_part*
 			);
 
 reserved_word
@@ -1039,7 +1037,8 @@ COMMAND_SUBSTITUTION_PAREN
 						{
 							if(--paren_level == 0)
 							{
-								throw new UnsupportedOperationException("Command substitution paren: RPAREN");
+								System.out.println("Parenlevel is 0");
+								// throw new UnsupportedOperationException("Command substitution paren: RPAREN");
 								//state.type = _type;
 								//state.channel = _channel;
 

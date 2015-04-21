@@ -19,7 +19,11 @@ public class Main {
 
         BashastLexer lexer = new BashastLexer(new ANTLRFileStream(args[0]));
         BashastParser parser = new BashastParser(new CommonTokenStream(lexer));
+        parser.setTrace(true);
+        
         ParseTree tree = parser.start();
+        
+        System.out.println(tree.getChildCount());
         GenerateSourceListener listener = new GenerateSourceListener();
         
         ParseTreeWalker walker = new ParseTreeWalker();
